@@ -31,18 +31,18 @@ describe('<Display/>', () => {
   });
   it('uses red-class when locked', () => {
     const { getByText } = render(<Display locked={true}/>);
-    expect(getByText(/^Locked/i).className).toContain('red-led');
+    expect(getByText(/^locked/i).className).toContain('red-led');
   });
   it('uses red-class when closed', () => {
     const { getByText } = render(<Display closed={true}/>);
-    expect(getByText(/^Closed/i).className).toContain('red-led');
+    expect(getByText(/^closed/i).className).toContain('red-led');
   });
   it('uses green-class when unlocked', () => {
     const { getByText } = render(<Display unlocked={true}/>);
-    expect(getByText(/^Unlocked/i).className).toContain('green-led');
+    expect(getByText(/^unlocked/i).className).toContain('green-led');
   });
   it('uses green-class when open', () => {
     const { getByText } = render(<Display open={true}/>);
-    expect(getByText(/^Open/i).className).toContain('green-led');
+    expect(getByText(/^open/i).className).toContain('green-led');
   });
 });
