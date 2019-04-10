@@ -1,8 +1,10 @@
 // Test away!
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, cleanup } from 'react-testing-library';
 
 import Controls from './Controls';
+
+afterEach(cleanup);
 
 describe('<Controls />', () => {
 
@@ -38,18 +40,18 @@ describe('<Controls />', () => {
       getByText(/lock gate/i);
     });
 
-    // it('close click calls toggleClosed', () => {
-    //   const toggleClosedMock = jest.fn();
-    //   const { getByText } = render(<Controls toggleClosed={toggleClosedMock}/>);
-    //   const closeButton = getByText(/close gate/i);
-    //   fireEvent.click(closeButton);
-    //   expect(toggleClosedMock).toHaveBeenCalledTimes(1);
-    // });
-
-    it('close button is disabled if the gate is closed', () => {
-      const { getByText } = render(<Controls closed={true}/>);
+    it('close click calls toggleClosed', () => {
+      const toggleClosedMock = jest.fn();
+      const { getByText } = render(<Controls toggleClosed={toggleClosedMock}/>);
       const closeButton = getByText(/close gate/i);
-      expect(closeButton.disabled).toBe(false);
+      fireEvent.click(closeButton);
+      expect(toggleClosedMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('close button is hidden if the gate is closed', () => {
+      const { queryByText } = render(<Controls closed={true}/>);
+      const closeButton = queryByText(/close gate/i);
+      expect(closeButton).toBeNull();
     });
 
     it('the locked toggle button is disabled if the gate is open', () => {
